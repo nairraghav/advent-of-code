@@ -1,4 +1,5 @@
-# advent-of-code-2019
-This repository contains solutions for the Advent of Code 2019 challenge
+# advent-of-code
+This repository contains solutions for the Advent of Code challenges
 
-https://adventofcode.com/2019
+2019 - https://adventofcode.com/2019
+2020 - https://adventofcode.com/2020
