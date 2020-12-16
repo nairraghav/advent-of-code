@@ -9,5 +9,3 @@ with open("input.txt", "r") as puzzle_input:
             busses.append(int(bus_input))
         else:
             busses.append("x")
-
-
