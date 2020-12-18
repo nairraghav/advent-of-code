@@ -33,6 +33,31 @@ def simplify(input_string):
             second_number = None
     return first_number
 
+
+def simplify_first(input_string):
+    while "+" in input_string:
+        starting_index = None
+        ending_index = None
+        for index in range(len(input_string)):
+            if input_string[index] == "+":
+                starting_subset = input_string[:index-2]
+                starting_index = starting_subset.rfind(" ")
+                if starting_index < 0:
+                    starting_index = 0
+                else:
+                    starting_index += 1
+                ending_subset = input_string[index+2:]
+                ending_index = ending_subset.find(" ") - 1
+                if ending_index < 0:
+                    ending_index = len(ending_subset)
+
+                ending_index += index + 2
+        
+        result = simplify(input_string[starting_index:ending_index+1])
+        input_string = input_string[:starting_index] + str(result) + input_string[ending_index+1:]
+
+    return simplify(input_string)
+
 running_total = 0
 with open("input.txt", "r") as puzzle_input:
     for line in puzzle_input:
@@ -46,9 +71,9 @@ with open("input.txt", "r") as puzzle_input:
                 elif line[index] == ")":
                     ending_index = index
                     break
-            result = simplify(line[starting_index+1:ending_index])
+            result = simplify_first(line[starting_index+1:ending_index])
             line = line[:starting_index] + str(result) + line[ending_index+1:]
-
-        running_total += simplify(line)
+            print(line)
+        running_total += simplify_first(line)
 
 print(running_total)
