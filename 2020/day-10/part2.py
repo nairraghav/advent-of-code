@@ -1,16 +1,15 @@
 def find_combinations(puzzle_input):
-    explored_inputs = [puzzle_input]
-    explored_set = set()
-    explored_set.add(str(puzzle_input))
-    for explored_input in explored_inputs:
-        for index in range(len(explored_input) - 2):
-            if explored_input[index+2] - explored_input[index] <= 3:
-                string_input = str(explored_input[:index+1] + explored_input[index+2:])
-                if string_input not in explored_set:
-                    explored_set.add(string_input)
-                    explored_inputs.append(explored_input[:index+1] + explored_input[index+2:])
-    
-    print(len(explored_set))
+    unnecessary_numbers = []
+    index = 1
+    while index < len(puzzle_input) - 1:
+        if puzzle_input[index+1] - puzzle_input[index-1] <= 3:
+            unnecessary_numbers.append(puzzle_input[index])
+            del puzzle_input[index]
+        else:
+            index += 1
+
+    print(unnecessary_numbers)
+    print(2 ** len(unnecessary_numbers))
 
 
 with open("input.txt", "r") as puzzle_input:
@@ -28,4 +27,9 @@ with open("input.txt", "r") as puzzle_input:
     1, 4, 5, 7, 10, 11, 12, 15, 16, 19 (remove 6)
         1, 4, 7, 10, 11, 12, 15, 16, 19 (remove 5)
     1, 4, 6, 7, 10, 11, 12, 15, 16, 19 (remove 5)
+"""
+
+"""
+1, 4, 5, 6, 7, 10, 11, 12, 15, 16, 19
+Unnecessary = 5, 6, 11,
 """
