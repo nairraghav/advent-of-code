@@ -1,3 +1,4 @@
+# incorrect solution
 def get_neighbors(row_index, column_index, width, length):
     neighbors = []
     if row_index - 1 >= 0:
