@@ -5,8 +5,8 @@ with open("input.txt", "r") as puzzle_input:
 
     for line in puzzle_input:
         rucksack_length = len(line)
-        rucksack_one = line[:rucksack_length//2]
-        rucksack_two = line[rucksack_length//2:]
+        rucksack_one = line[: rucksack_length // 2]
+        rucksack_two = line[rucksack_length // 2 :]
 
         unique_letters = {letter for letter in rucksack_one}
         matched_letter = None
@@ -25,4 +25,3 @@ with open("input.txt", "r") as puzzle_input:
             running_total += 26
 
 print(running_total)
-

@@ -34,9 +34,7 @@ with open("input.txt", "r") as puzzle_input:
 
     for line in puzzle_input:
         opponent_pick, my_pick = line.split()
-        total_score += pick_score[my_pick] + get_round_score(
-            opponent_pick, my_pick
-        )
+        total_score += pick_score[my_pick] + get_round_score(opponent_pick, my_pick)
 
 
 print(total_score)

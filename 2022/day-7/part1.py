@@ -1,6 +1,6 @@
 def add_to_current_and_parents(paths_to_filesize, current_path, file_size):
     temp_path = current_path
-    
+
     while temp_path:
         paths_to_filesize[temp_path] = paths_to_filesize.get(temp_path, 0) + file_size
         if len(temp_path) == 2:
@@ -16,7 +16,7 @@ current_path = ""
 result = None
 
 with open("input.txt", "r") as puzzle_input:
-    
+
     for line in puzzle_input:
         line = line.strip()
         if line.startswith("$"):
@@ -43,7 +43,11 @@ with open("input.txt", "r") as puzzle_input:
             if file_size_or_dir == "dir":
                 pass
             else:
-                add_to_current_and_parents(paths_to_filesize, current_path, int(file_size_or_dir))
+                add_to_current_and_parents(
+                    paths_to_filesize, current_path, int(file_size_or_dir)
+                )
 
-result = sum([filesize for _, filesize in paths_to_filesize.items() if filesize <= 100000])
+result = sum(
+    [filesize for _, filesize in paths_to_filesize.items() if filesize <= 100000]
+)
 print(result)

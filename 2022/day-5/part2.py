@@ -10,7 +10,7 @@ with open("input.txt", "r") as puzzle_input:
     for line in puzzle_input:
         if line_counter < number_of_vertical_stacks:
             for index in range(number_of_stacks):
-                current_stack = line[1 + index*4].strip()
+                current_stack = line[1 + index * 4].strip()
                 if current_stack:
                     starting_stacks[index].append(current_stack)
 
@@ -29,12 +29,12 @@ for instruction in instructions:
     # subtracting 1 since these are not 0 based
     source = int(source) - 1
     dest = int(dest) - 1
-    
+
     print(amount_to_move, source, dest)
     items_to_move = list()
     for _ in range(amount_to_move):
         items_to_move.append(starting_stacks[source].pop(0))
-    
+
     starting_stacks[dest][0:0] = items_to_move
 
 print(starting_stacks)
