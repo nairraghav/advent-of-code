@@ -63,7 +63,7 @@ visited_tail_locations.add(tuple(tail_location))
 
 with open("input.txt", "r") as puzzle_input_file:
     for line in puzzle_input_file:
-        puzzle_input.append(line.strip().split( ))
+        puzzle_input.append(line.strip().split())
 
 for direction, amount in puzzle_input:
     amount = int(amount)
