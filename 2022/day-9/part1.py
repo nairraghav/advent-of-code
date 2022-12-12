@@ -51,7 +51,7 @@ def determine_new_tail_location(header_location, tail_location):
             else:
                 tail_location[0] -= 1
             return tail_location
-    
+
     return tail_location
 
 
@@ -73,19 +73,19 @@ for direction, amount in puzzle_input:
             header_location[1] += 1
             tail_location = determine_new_tail_location(header_location, tail_location)
             visited_tail_locations.add(tuple(tail_location))
-    
+
     if direction == "D":
         for _ in range(amount):
             header_location[1] -= 1
             tail_location = determine_new_tail_location(header_location, tail_location)
             visited_tail_locations.add(tuple(tail_location))
-    
+
     if direction == "L":
         for _ in range(amount):
             header_location[0] -= 1
             tail_location = determine_new_tail_location(header_location, tail_location)
             visited_tail_locations.add(tuple(tail_location))
-    
+
     if direction == "R":
         for _ in range(amount):
             header_location[0] += 1

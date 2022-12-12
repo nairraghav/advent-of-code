@@ -51,7 +51,7 @@ def determine_new_tail_location(header_location, tail_location):
             else:
                 tail_location[0] -= 1
             return tail_location
-    
+
     return tail_location
 
 
@@ -61,10 +61,12 @@ def knots_helper(knots):
         tail_location = knots[index + 1]
         if index == 4:
             import pdb
-            #pdb.set_trace()
+
+            # pdb.set_trace()
         knots[index + 1] = determine_new_tail_location(header_location, tail_location)
-    
+
     return knots
+
 
 puzzle_input = list()
 knots = [[0, 0] for _ in range(10)]
@@ -77,31 +79,31 @@ with open("input.txt", "r") as puzzle_input_file:
 
 for direction, amount in puzzle_input:
     amount = int(amount)
-    
+
     if direction == "U":
         for _ in range(amount):
             knots[0][1] += 1
             knots = knots_helper(knots)
             visited_tail_locations.add(tuple(knots[-1]))
-    
+
     if direction == "D":
         for _ in range(amount):
             knots[0][1] -= 1
             knots = knots_helper(knots)
             visited_tail_locations.add(tuple(knots[-1]))
-    
+
     if direction == "L":
         for _ in range(amount):
             knots[0][0] -= 1
             knots = knots_helper(knots)
             visited_tail_locations.add(tuple(knots[-1]))
-    
+
     if direction == "R":
         for _ in range(amount):
             knots[0][0] += 1
             knots = knots_helper(knots)
             visited_tail_locations.add(tuple(knots[-1]))
-    
+
     print(knots)
     print("\n\n")
 
