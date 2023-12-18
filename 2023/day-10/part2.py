@@ -5,6 +5,8 @@ def get_input():
         for line in lines:
             line = line.strip()
             line = [int(item) for item in line.split()]
+            line = line[-1::-1]
+            print(line)
             puzzle_lines.append(line)
     
     return puzzle_lines
@@ -30,7 +32,6 @@ def get_next_digit(line):
     running_sum = 0
     for line in lines:
         running_sum += line[-1]
-
     return running_sum
 
 def main():
