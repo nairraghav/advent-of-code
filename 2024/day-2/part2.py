@@ -1,63 +1,44 @@
-def check_all_increasing(numbers, allowed_single_failure):
+from copy import deepcopy
+
+
+def check_all_increasing(numbers):
     b = [number for number in numbers]
     index = 1
     while index < len(b):
         if b[index] <= b[index-1]:
-            if allowed_single_failure:
-                return False, b
-            else:
-                allowed_single_failure = True
-                del b[index]
-                index -= 1  # offset
+            return False
         index += 1
-    return True, b
+    return True
 
 
-def check_all_decreasing(numbers, allowed_single_failure):
+def check_all_decreasing(numbers):
     b = [number for number in numbers]
     index = 1
     while index < len(b):
         if b[index] >= b[index-1]:
-            if allowed_single_failure:
-                return False, b
-            else:
-                allowed_single_failure = True
-                del b[index]
-                index -= 1  # offset
+            return False
         index += 1            
-    return True, b
+    return True
 
 
-def check_all_increasing_or_decreasing(numbers, allowed_single_failure=False):
-    a, b = check_all_increasing(numbers, allowed_single_failure=allowed_single_failure)
-    print(a)
-    if a:
-        numbers = b
+def check_all_increasing_or_decreasing(numbers):
+    if check_all_increasing(numbers):
         return True
 
-    c, d = check_all_decreasing(numbers, allowed_single_failure=allowed_single_failure)
-    print (c)
-    if c:
-        numbers = d
+    if check_all_decreasing(numbers):
         return True
-        
+
     return False
 
 
 def check_within_range(numbers):
     b = [number for number in numbers]
-    allowed_single_failure = False
     index = 1
     while index < len(b):
         if not (1 <= abs(b[index] - b[index - 1]) <= 3):
-            if allowed_single_failure:
-                return False, b
-            else:
-                allowed_single_failure = True
-                del b[index]
-                index -= 1  # offset
+            return False
         index += 1
-    return True, b
+    return True
 
 
 result = list()
@@ -70,18 +51,18 @@ with open("input.txt", "r") as puzzle_input:
         line = line.strip()
         numbers = line.split()
         numbers = [int(number) for number in numbers]
-        print(numbers)
-        if not check_all_increasing_or_decreasing(numbers):
-            result.append("Unsafe1")
+        if check_all_increasing_or_decreasing(numbers) and check_within_range(numbers):
+            running_sum += 1
+            result.append(numbers)
             continue
 
-        a, b = check_within_range(numbers)
-        if not a:
-            result.append("Unsafe2")
-            continue
-
-        result.append("Safe")
-        running_sum += 1
-
+        for index_to_remove in range(len(numbers)):
+            new_numbers = deepcopy(numbers)
+            new_numbers.pop(index_to_remove)
+            if check_all_increasing_or_decreasing(new_numbers) and check_within_range(new_numbers):
+                running_sum += 1
+                result.append(new_numbers)
+                break
+    
     print(result)
     print(running_sum)
